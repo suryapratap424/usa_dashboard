@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map</title>
+    <script src="https://kit.fontawesome.com/3f04a3eb9b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .list-item>div section *:first-child {
+            display: block;
+            font-size: small;
+            color: gray;
+        }
+
+        .list-item>div section {
+            background-color: #f4f4f4;
+            text-align: center;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="search"><u id="reset">Reset All Filters</u>
+            <h4>SEARCH</h4><input type="text" id="name" placeholder="NAME / Building No or Address">
+        </div>
+        <div id="filter">
+            <div>
+                <h3>Administrative Unit:</h3>
+                <select name="education" id="education">
+                    <option value="none" selected>Choose Administrative Unit...</option>
+                </select>
+            </div>
+            <div>
+                <h3>STATE:</h3>
+                <select id="cca">
+                    <option value="none" selected>Choose state...</option>
+                </select>
+            </div>
+            <div>
+                <h3>OTHER OPTIONS:</h3>
+                <select id="other"></select>
+            </div>
+            <div>
+                <form id="logform" method="post" action="/login">
+                </form>
+                <script>
+                    fetch('/logged').then(r => r.json()).then(x => {
+                        let lg = document.getElementById("logform")
+                        console.log(x);
+                        if (x.email) {
+                            lg.innerHTML = `<h3>Hii ${x.email}</h3>`
+                        } else {
+                            if (x.tried==true)
+                                lg.innerHTML = `<input type="email" name="email" placeholder="👤enter email" required><input type="password" name="password" placeholder="🔑password" required>*wrong password<input type="submit" value="Login">`
+                            else
+                                lg.innerHTML = `<input type="email" name="email" placeholder="👤enter email" required><input type="password" name="password" placeholder="🔑password" required><input type="submit" value="Login">`
+                        }
+                    })
+                </script>
+            </div>
+        </div>
+        <div id="listbox">
+            <p><span id="school-count">***</span> Proprietaire match your criteria</p>
+            <ul id="list">
+            </ul>
+        </div>
+        <div id="map">
+        </div>
+        <div id="bluebox">
+            <div class="other">
+                <h1>Other options to consider</h1>
+                <div>
+                    <h3>Year Of Establishment:<span id="rangevalue">1950-2022</span></h3>
+                    <input type="range" id="yearRange">
+                </div>
+            </div>
+            <div id="done">Done</div>
+        </div>
+        <script>
+            document.getElementById('other').addEventListener('mousedown', (e) => {
+                e.preventDefault()
+                document.getElementById('bluebox').style.display = 'flex';
+                document.getElementsByClassName('other')[0].style.display = 'flex';
+                document.getElementById('map').style.display = 'none';
+            })
+            document.getElementById('done').addEventListener('click', () => {
+                document.getElementById('bluebox').style.display = 'none';
+                document.getElementsByClassName('other')[0].style.display = 'none';
+                document.getElementById('map').style.display = 'flex';
+            })
+        </script>
+    </div>
+</body>
+<script src="./app.js"></script>
+
+</html>
