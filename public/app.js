@@ -265,3 +265,20 @@ fetch("./usa.csv")
       generateList(filtered);
     };
   });
+//----------------------------------menu-----------------------------------
+function changing(e){
+  Array.from(document.getElementsByClassName('menu')).forEach(a=>{
+    console.log(e.id);
+    if (a.classList.contains('active')) 
+    a.classList.remove('active');
+    if (a.classList.contains(e.id)) 
+    a.classList.add('active');
+  })
+  Array.from(document.getElementsByClassName('f')).forEach(a=>{
+    console.log();
+    if (a.id=='f-'+e.id.split('-')[1]) 
+    a.style.display='block'
+    else
+    a.style.display='none'
+  })
+}

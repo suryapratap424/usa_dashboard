@@ -31,9 +31,13 @@
 
 <body>
     <div id="container">
-        <div id="search"><u id="reset">Reset All Filters</u>
-            <h4>SEARCH</h4><input type="text" id="name" placeholder="NAME / Building No or Address">
+        <div id="search">
+            <img src="logo.png" alt="logo">
+            <u id="reset">Reset All Filters</u>
+            <!-- <h4>SEARCH</h4> -->
+            <input type="text" id="name" placeholder=" search by NAME / Building No or Address">
         </div>
+
         <div id="filter">
             <div>
                 <h3>Administrative Unit:</h3>
@@ -71,9 +75,40 @@
             </div>
         </div>
         <div id="listbox">
-            <p><span id="school-count">***</span> Proprietaire match your criteria</p>
-            <ul id="list">
-            </ul>
+            <!-- ----------------menu-------------- -->
+            <div id="menu">
+                <input type="radio" name="menu" onchange="changing(this)" id="fa-user">
+                <label for="fa-user">
+                    <i class="menu fas fa-user"></i>
+                </label>
+                <input type="radio" name="menu" onchange="changing(this)" id="fa-search" checked>
+                <label for="fa-search">
+                    <i class="menu active fas fa-search"></i>
+                </label>
+                <input type="radio" name="menu" onchange="changing(this)" id="fa-money-bill-transfer">
+                <label for="fa-money-bill-transfer">
+                    <i class="menu fa fa-money-bill-transfer"></i>
+                </label>
+                <input type="radio" name="menu" onchange="changing(this)" id="fa-cog">
+                <label for="fa-cog">
+                    <i class="menu fa fa-cog"></i>
+                </label>
+            </div>
+            <!-- ----------------menu-------------- -->
+            <div class="f" id="f-search">
+                <p><span id="school-count">***</span> Properties match your criteria</p>
+                <ul id="list">
+                </ul>
+            </div>
+            <div class="f" id="f-user" style="display: none;">
+                your profile info
+            </div>
+            <div class="f" id="f-money" style="display: none;">
+                your transactions with bar chart
+            </div>
+            <div class="f" id="f-cog" style="display: none;">
+                settings
+            </div>
         </div>
         <div id="map">
         </div>
